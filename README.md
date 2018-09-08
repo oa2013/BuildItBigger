@@ -88,11 +88,6 @@ https://cloud.google.com/endpoints/docs/frameworks/java/migrating-android
 Note: You do not need to follow the rest of steps in the migration guide, only
 the Setup Cloud SDK.
 
-Start or stop your local server by using the gradle tasks as shown in the following
-screenshot:
-
-<img src="/FinalProject/GCE-server-gradle-tasks.png" height="500">
-
 Once your local GCE server is started you should see the following at 
 [localhost:8080](http://localhost:8080)
 
@@ -166,3 +161,7 @@ Once you have a functioning project, consider adding more features to test your 
 * Make the free app variant display interstitial ads between the main activity and the joke-displaying activity.
 * Have the app display a loading indicator while the joke is being fetched from the server.
 * Write a Gradle task that starts the GCE dev server, runs all the Android tests, and shuts down the dev server.
+=======
+# BuildItBigger
+Android Nanodegree Project 4
+
