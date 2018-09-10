@@ -1,17 +1,17 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-import com.agafonova.javajokes.*;
-import com.agafonova.lib.*;
 
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.AsyncResponse {
 
-public class MainActivity extends AppCompatActivity {
+    EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +43,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-
-        javaJokesClass joker = new javaJokesClass();
-
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, joker.SQL());
-        sendIntent.setType("text/plain");
-
-        if (sendIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(sendIntent);
-        }
+        asyncTask.execute(new Pair<Context, String>(this, "dummyInput"));
+        asyncTask.delegate = this;
     }
 
+    @Override
+    public void processFinish(String joke) {
 
+        if(joke != null) {
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, joke);
+            sendIntent.setType("text/plain");
+
+            if (sendIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(sendIntent);
+            }
+        }
+    }
 }

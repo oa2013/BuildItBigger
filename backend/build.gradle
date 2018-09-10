@@ -1,5 +1,9 @@
 // If you would like more information on the gradle-appengine-plugin please refer to the github page
 // https://github.com/GoogleCloudPlatform/gradle-appengine-plugin
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.google.cloud.tools.appengine'
+apply plugin: 'com.google.cloud.tools.endpoints-framework-server'
 
 buildscript {
     repositories {
@@ -15,14 +19,6 @@ repositories {
     jcenter()
 }
 
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'com.google.cloud.tools.appengine'
-apply plugin: 'com.google.cloud.tools.endpoints-framework-server'
-
-appengine {
-}
-
 appengine.tools.cloudSdkHome="/usr/local/google-cloud-sdk"
 
 sourceCompatibility = JavaVersion.VERSION_1_7
@@ -35,4 +31,5 @@ dependencies {
     implementation 'javax.servlet:servlet-api:2.5'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
+    compile project(path: ':lib')
 }
