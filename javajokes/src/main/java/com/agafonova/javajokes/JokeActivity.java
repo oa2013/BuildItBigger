@@ -21,10 +21,15 @@ public class JokeActivity extends AppCompatActivity {
             return;
         }
 
-        String jokeText = extras.getString(Intent.EXTRA_TEXT);
+        if (getIntent().hasExtra(Intent.EXTRA_TEXT)) {
+            String jokeText = extras.getString(Intent.EXTRA_TEXT);
 
-        if (jokeText != null) {
-            mJokes.setText(jokeText);
+            if (jokeText != null) {
+                mJokes.setText(jokeText);
+            }
+        }
+        else {
+            return;
         }
     }
 }

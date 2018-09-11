@@ -1,6 +1,7 @@
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 import android.util.Pair;
 
 import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
@@ -31,19 +32,23 @@ public class AsyncTaskAndroidTest{
         final CountDownLatch latch = new CountDownLatch(1);
         context = InstrumentationRegistry.getContext();
 
-        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask() {
-            @Override
-            protected void onPostExecute(String joke) {
-                assertNotNull(joke);
-                if (joke != null){
-                    assertTrue(joke.length() > 0);
-                    latch.countDown();
+        try{
+            EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask() {
+                @Override
+                protected void onPostExecute(String joke) {
+                    assertNotNull(joke);
+                    if (joke != null){
+                        assertTrue(joke.length() > 0);
+                        latch.countDown();
+                    }
                 }
-            }
-        };
-        endpointsAsyncTask.execute(new Pair<Context, String>(context, "dummyInput"));
+            };
+            endpointsAsyncTask.execute(new Pair<Context, String>(context, "dummyInput"));
+        }
+        catch(Exception e) {
+            Log.d("testAsyncTask exception: ", e.toString());
+        }
+
         latch.await();
-
     }
-
 }

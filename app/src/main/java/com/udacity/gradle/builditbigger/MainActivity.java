@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.agafonova.javajokes.JokeActivity;
+
 public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.AsyncResponse {
 
     EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
         if(joke != null) {
 
-            Intent sendIntent = new Intent();
+            Intent sendIntent = new Intent(this, JokeActivity.class);
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, joke);
             sendIntent.setType("text/plain");
